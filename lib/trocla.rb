@@ -111,6 +111,7 @@ class Trocla
 
   def read_config
     if @config_file.nil?
+      STDERR.puts "Trocla: using default configuration #{f_config}. Use option -c (--config) to overwrite"
       default_config
     else
       raise "Configfile #{@config_file} does not exist!" unless File.exists?(@config_file)
@@ -121,7 +122,6 @@ class Trocla
   def default_config
     require 'yaml'
     f_config = File.expand_path(File.join(File.dirname(__FILE__),'trocla','default_config.yaml'))
-    STDERR.puts "Trocla: using default configuration #{f_config}. Use option -c (--config) to overwrite"
     YAML.load(File.read(f_config))
   end
 
